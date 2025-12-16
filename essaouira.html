@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essaouira - Mogador Guide</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- DESIGN SYSTEM ESSAOUIRA --- */
+        :root {
+            --primary: #0984e3; /* Bleu Mogador */
+            --accent: #f1c40f; /* Jaune Soleil/Sable */
+            --dark: #2d3436;
+            --light: #dfe6e9;
+            --bg-paper: #f7f9fa;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: var(--bg-paper);
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        /* Hero Header */
+        header {
+           background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('images/essaouira_header.jpg');
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .badge-city { background: var(--accent); color: var(--dark); padding: 5px 15px; border-radius: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
+        .back-btn { position: absolute; top: 20px; left: 20px; background: white; color: var(--primary); padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: -60px auto 50px;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Tabs Navigation */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 2px solid #eee;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #777;
+            transition: 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Content */
+        .content-section { display: none; animation: slideUp 0.5s; }
+        .content-section.active { display: block; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        h2 { color: var(--primary); font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-top: 0; }
+        h3 { border-left: 4px solid var(--accent); padding-left: 15px; margin-top: 30px; }
+
+        /* Info Boxes & Tables */
+        .info-box { background: #e3f2fd; padding: 20px; border-radius: 8px; border-left: 5px solid var(--primary); margin: 20px 0; }
+        .warning-box { background: #fff3e0; padding: 20px; border-radius: 8px; border-left: 5px solid var(--accent); margin: 20px 0; }
+
+        .price-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        .price-table th { background: var(--dark); color: white; padding: 12px; text-align: left; }
+        .price-table td { border-bottom: 1px solid #eee; padding: 12px; }
+        .price-table tr:hover { background: #f9f9f9; }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .card-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+
+        #map { height: 400px; width: 100%; border-radius: 10px; margin-top: 20px; }
+
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } header h1 { font-size: 3rem; } }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← Accueil</a>
+
+    <header>
+        <div>
+            <span class="badge-city">La Cité des Alizés</span>
+            <h1>Essaouira</h1>
+            <p>Surf, Histoire & Musique Gnaoua</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab('decouvrir')">🏛️ Découvrir</button>
+            <button class="tab-btn" onclick="openTab('activites')">🏄‍♂️ Sport & Fun</button>
+            <button class="tab-btn" onclick="openTab('transport')">🚌 Transport & Prix</button>
+            <button class="tab-btn" onclick="openTab('manger')">🐟 Manger & Dormir</button>
+            <button class="tab-btn" onclick="openTab('culture')">🎨 Histoire</button>
+        </div>
+
+        <div id="decouvrir" class="content-section active">
+            <h2>Bienvenue à Mogador</h2>
+            <img src="images/essaouira_medina.jpg" class="card-img" alt="Medina">
+            <p>Essaouira est une ville fortifiée du 18ème siècle, classée au patrimoine mondial de l'UNESCO. Contrairement au chaos de Marrakech, ici l'ambiance est détendue, bercée par le bruit de l'océan et les mouettes.</p>
+            
+            <div class="info-box">
+                <strong>💡 Le Climat :</strong> Essaouira est connue pour ses vents forts (les Alizés). Même en été, il ne fait jamais trop chaud (max 25°C). Prévoyez toujours une petite veste le soir !
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3>La Skala de la Kasbah</h3>
+                    <p>C'est le mur défensif face à la mer avec ses canons en bronze. C'est ici qu'ont été tournées des scènes de la série <em>Game of Thrones</em> (Astapor).</p>
+                </div>
+                <div>
+                    <h3>Le Port de Pêche</h3>
+                    <p>Le cœur battant de la ville. Venez voir les fameux bateaux bleus en bois et assistez à la vente des sardines fraîches.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="activites" class="content-section">
+            <h2>Sports & Loisirs</h2>
+            <p>Essaouira est la capitale marocaine des sports nautiques.</p>
+
+            <table class="price-table">
+                <tr>
+                    <th>Activité</th>
+                    <th>Détails</th>
+                    <th>Prix Estimé (2024)</th>
+                </tr>
+                <tr>
+                    <td><strong>Kitesurf</strong> (Cours)</td>
+                    <td>Cours de 2h avec moniteur & matériel</td>
+                    <td>500 - 600 DH</td>
+                </tr>
+                <tr>
+                    <td><strong>Surf</strong> (Location)</td>
+                    <td>Location planche + combinaison (1 jour)</td>
+                    <td>100 - 150 DH</td>
+                </tr>
+                <tr>
+                    <td><strong>Quad</strong></td>
+                    <td>Randonnée 2h (Dunes & Forêt)</td>
+                    <td>350 - 500 DH</td>
+                </tr>
+                <tr>
+                    <td><strong>Cheval / Dromadaire</strong></td>
+                    <td>Balade 1h au coucher du soleil</td>
+                    <td>150 - 200 DH</td>
+                </tr>
+            </table>
+
+            <div class="warning-box">
+                <strong>⚠️ Baignade :</strong> La plage principale est surveillée, mais attention aux courants forts si vous allez vers les plages sauvages du sud.
+            </div>
+        </div>
+
+        <div id="transport" class="content-section">
+            <h2>Comment venir & Se déplacer ?</h2>
+            <p>Essaouira est très bien connectée. Voici les options pour votre budget.</p>
+
+            <h3>🚌 Depuis Marrakech (180 km)</h3>
+            <ul>
+                <li><strong>Bus CTM / Supratours :</strong> Confortable et climatisé. Départ de la gare routière.
+                    <br><em>Prix : 100 - 120 DH (3h de route)</em></li>
+                <li><strong>Grand Taxi :</strong> Plus rapide mais plus serré.
+                    <br><em>Prix : 100 DH la place (ou 600 DH taxi privé).</em></li>
+            </ul>
+
+            <h3>🚌 Depuis Agadir (175 km)</h3>
+            <ul>
+                <li><strong>Bus :</strong> Trajet magnifique longeant la côte et les arganiers.
+                    <br><em>Prix : 90 - 110 DH (3h30 de route).</em></li>
+            </ul>
+
+            <h3>🚕 Petit Taxi (Ville)</h3>
+            <p>Les petits taxis sont bleus. Le prix est fixe pour la plupart des trajets en ville : <strong>7 DH</strong> le jour / <strong>8 DH</strong> la nuit.</p>
+        </div>
+
+        <div id="manger" class="content-section">
+            <h2>Gastronomie & Hébergement</h2>
+            
+            <div class="grid-2">
+                <div>
+                    <h3>🍽️ Où Manger ?</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Les Grills du Port :</strong> Achetez votre poisson frais et faites-le griller sur place.
+                            <br><em>Budget : 50-80 DH selon le poids.</em></li>
+                        <li><strong>Le Marché aux Poissons :</strong> Dans la médina, ambiance locale garantie.</li>
+                        <li><strong>Snacks (Place Moulay Hassan) :</strong> Sandwichs et jus frais pas chers.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🛏️ Où Dormir ?</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Hostels (Surf Camp) :</strong> Ambiance jeune.
+                            <br><em>Prix : 100 - 150 DH (Lit dortoir).</em></li>
+                        <li><strong>Riad Traditionnel :</strong> Charme et calme dans la médina.
+                            <br><em>Prix : 400 - 900 DH (Chambre double).</em></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <strong>🥜 Spécialité locale :</strong> L'huile d'Argan et l'Amlou. Achetez-les dans les coopératives hors de la ville pour garantir la qualité.
+            </div>
+        </div>
+
+        <div id="culture" class="content-section">
+            <h2>Une ville multiculturelle</h2>
+            <p>Essaouira est un exemple unique de coexistence entre musulmans, juifs et chrétiens au Maroc.</p>
+
+            <h3>Bayt Dakira (La Maison de la Mémoire)</h3>
+            <p>Un musée magnifique situé dans l'ancien quartier juif (Mellah). Il raconte l'histoire du judaïsme à Essaouira. L'entrée est souvent gratuite.</p>
+
+            <h3>L'influence Portugaise</h3>
+            <p>En 1506, les Portugais ont construit la forteresse "Castelo Real". Bien que la ville actuelle date du 18ème siècle (Sultan Sidi Mohammed Ben Abdallah), l'influence militaire européenne est visible dans l'architecture des remparts.</p>
+
+            <div id="map"></div>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Tab Logic
+        function openTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            // Show selected
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            // Refresh Map if needed
+            if(tabName === 'culture') {
+                setTimeout(() => map.invalidateSize(), 200);
+            }
+        }
+
+        // Map Logic
+        var map = L.map('map').setView([31.5085, -9.7595], 14);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        L.marker([31.5050, -9.7700]).addTo(map).bindPopup("<b>Port & Sqala</b>");
+        L.marker([31.5130, -9.7650]).addTo(map).bindPopup("<b>Mellah & Bayt Dakira</b>");
+        L.marker([31.4950, -9.7600]).addTo(map).bindPopup("<b>Plage Principale</b>");
+    </script>
+</body>
+</html>
