@@ -32,7 +32,7 @@ const Home = () => {
       </div>
 
       <div className="split-side essaouira-side" onClick={() => navigate('/essaouira')}>
-        <div className="split-bg" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1577971132997-1f2e16d4453f?auto=format&fit=crop&q=60&w=1200")' }}></div>
+        <div className="split-bg" style={{ backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Essaouira_Morocco_4.jpg/1200px-Essaouira_Morocco_4.jpg")' }}></div>
         <div className="split-content">
           <MapPin size={40} className="split-icon" />
           <h2>Essaouira</h2>
@@ -42,7 +42,7 @@ const Home = () => {
       </div>
 
       <div className="split-side tinghir-side" onClick={() => navigate('/tinghir')}>
-        <div className="split-bg" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=60&w=1200")' }}></div>
+        <div className="split-bg" style={{ backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tinghir_Oasis.jpg/1200px-Tinghir_Oasis.jpg")' }}></div>
         <div className="split-content">
           <MapPin size={40} className="split-icon" />
           <h2>Tinghir</h2>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Mountain, TreePine, Map, Camera } from 'lucide-react';
+import { ArrowLeft, Mountain, TreePine, Map, Utensils, Info, Bed } from 'lucide-react';
 
 const Tinghir = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Tinghir = () => {
 
       {/* Hero Parallax */}
       <div className="city-hero">
-        <div className="city-hero-bg" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=60&w=1920")' }}></div>
+        <div className="city-hero-bg" style={{ backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Todgha_Gorge_-_Tinghir.jpg/1920px-Todgha_Gorge_-_Tinghir.jpg")' }}></div>
         <div className="city-hero-content">
           <motion.h1 
             initial={{ scale: 0.8, opacity: 0 }} 
@@ -60,15 +60,49 @@ const Tinghir = () => {
           <div className="intro-text">
             <h2>Un joyau dans le sud marocain</h2>
             <p>
-              Tinghir est une ville fascinante située au centre-est du Maroc. Connue pour 
-              sa palmeraie luxuriante qui s'étend sur des kilomètres et ses immenses gorges, 
-              c'est un lieu où la nature brute rencontre la culture amazighe millénaire.
+              Tinghir est une ville fascinante située au centre-est du Maroc, dans la région de Drâa-Tafilalet. 
+              Connue mondialement pour sa palmeraie verdoyante qui serpente sur plus de 30 kilomètres et pour 
+              les impressionnantes Gorges du Todra, c'est un point de rencontre magique entre la nature aride 
+              et la culture amazighe millénaire.
             </p>
           </div>
           <div className="intro-images">
-            <img src="https://images.unsplash.com/photo-1623910271101-9a9ec2b10ab8?auto=format&fit=crop&q=60&w=600" alt="Palmeraie Tinghir" className="img-feature" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Tinghir_Oasis_Morocco.jpg/800px-Tinghir_Oasis_Morocco.jpg" alt="Palmeraie Tinghir" className="img-feature" />
           </div>
         </motion.section>
+
+        {/* Tourist Guide Section */}
+        <section className="guide-section">
+          <motion.h2 
+            className="section-title"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            Planifiez votre Séjour
+          </motion.h2>
+          
+          <div className="guide-grid">
+            <motion.div className="guide-card tinghir-style" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <div className="guide-icon"><Utensils size={30} /></div>
+              <h3>Gastronomie</h3>
+              <p>Savourez le véritable Tajine berbère cuit lentement sur le feu de bois et profitez du thé à la menthe accompagné de dattes locales.</p>
+            </motion.div>
+            
+            <motion.div className="guide-card tinghir-style" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }}>
+              <div className="guide-icon"><Bed size={30} /></div>
+              <h3>Hébergement</h3>
+              <p>Passez la nuit dans une Maison d'hôtes traditionnelle ou une véritable Kasbah en pisé surplombant la grande oasis.</p>
+            </motion.div>
+
+            <motion.div className="guide-card tinghir-style" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.4 }}>
+              <div className="guide-icon"><Info size={30} /></div>
+              <h3>Climat & Transports</h3>
+              <p>Accessible en voiture ou en bus CTM/Supratours depuis Ouarzazate (2.5h) ou Errachidia. Le climat est très sec et chaud en été, doux en hiver.</p>
+            </motion.div>
+          </div>
+        </section>
 
         {/* Features Grid */}
         <section className="features-section">
@@ -83,24 +117,53 @@ const Tinghir = () => {
           </motion.h2>
           
           <div className="features-grid">
-            <motion.div className="feature-card tinghir-card" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <div className="feature-card tinghir-card">
               <div className="feature-icon"><Mountain size={40} /></div>
               <h3>Gorges du Todra</h3>
-              <p>Des falaises calcaires spectaculaires atteignant jusqu'à 300 mètres de haut, prisées par les grimpeurs du monde entier.</p>
-            </motion.div>
-
-            <motion.div className="feature-card tinghir-card" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }}>
+              <p>Des falaises calcaires spectaculaires atteignant jusqu'à 300 mètres de haut. Un véritable paradis pour les amateurs d'escalade et de randonnée.</p>
+            </div>
+            <div className="feature-card tinghir-card">
               <div className="feature-icon"><TreePine size={40} /></div>
-              <h3>L'Oasis</h3>
-              <p>Une bande de verdure incroyable au milieu d'un paysage aride, abritant des dattiers, des oliviers et des cultures traditionnelles.</p>
-            </motion.div>
-
-            <motion.div className="feature-card tinghir-card" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.4 }}>
+              <h3>La Palmeraie (Oasis)</h3>
+              <p>Promenez-vous à l'ombre des figuiers, grenadiers et palmiers dattiers en longeant les canaux d'irrigation (Seguias) centenaires.</p>
+            </div>
+            <div className="feature-card tinghir-card">
               <div className="feature-icon"><Map size={40} /></div>
-              <h3>Kasbahs Anciennes</h3>
-              <p>Explorez les ruines des anciennes forteresses en pisé qui témoignent de l'histoire riche de la région.</p>
-            </motion.div>
+              <h3>L'Ancien Ksar et Kasbahs</h3>
+              <p>Explorez les ruelles étroites du vieux village abandonné (Ksar) et les Kasbahs en ruine comme celle du Glaoui, témoins du riche passé architectural.</p>
+            </div>
           </div>
+        </section>
+
+        {/* Google Maps Interactive */}
+        <section className="map-section">
+          <motion.h2 
+            className="section-title"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            Carte de la Ville
+          </motion.h2>
+          <motion.div 
+            className="map-container"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54203.74312683072!2d-5.568471275990234!3d31.517395029094034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0ac2822557e101%3A0xe7a56113b28b7074!2sTinghir%2C%20Morocco!5e0!3m2!1sen!2sfr!4v1714567999999!5m2!1sen!2sfr" 
+              width="100%" 
+              height="450" 
+              style={{ border: 0, borderRadius: '20px' }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Carte Tinghir"
+            ></iframe>
+          </motion.div>
         </section>
 
         {/* Gallery */}
@@ -116,10 +179,10 @@ const Tinghir = () => {
           </motion.h2>
           
           <div className="gallery-grid">
-            <img src="https://images.unsplash.com/photo-1549405230-0f5da48d5918?auto=format&fit=crop&q=60&w=600" alt="Tinghir" className="gallery-img" />
-            <img src="https://images.unsplash.com/photo-1542104574-89c09cda3b20?auto=format&fit=crop&q=60&w=600" alt="Gorges" className="gallery-img" />
-            <img src="https://images.unsplash.com/photo-1522238386121-6927dcc34d40?auto=format&fit=crop&q=60&w=600" alt="Oasis" className="gallery-img" />
-            <img src="https://images.unsplash.com/photo-1582239454153-f725a3d077b0?auto=format&fit=crop&q=60&w=600" alt="Atlas" className="gallery-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tinghir_Oasis.jpg/800px-Tinghir_Oasis.jpg" alt="Vue Tinghir" className="gallery-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tinerhir_gorge.jpg/800px-Tinerhir_gorge.jpg" alt="Gorges" className="gallery-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Kasbah_Tinghir.jpg/800px-Kasbah_Tinghir.jpg" alt="Kasbah Tinghir" className="gallery-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Morocco_Gorges_du_Todra_20110321_1.jpg/800px-Morocco_Gorges_du_Todra_20110321_1.jpg" alt="Todra Route" className="gallery-img" />
           </div>
         </section>
       </div>
