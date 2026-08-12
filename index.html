@@ -1,133 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Régional Interactif - Maroc</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #1a1a1a; color: white; }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/header.jpg');
-            background-size: cover;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #f1c40f; /* Doré */
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin-bottom: 50px;
-        }
-
-        /* City Cards Container */
-        .cities-container {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        /* City Card Styling */
-        .city-card {
-            width: 300px;
-            height: 400px;
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .city-card:hover {
-            transform: scale(1.05);
-            border: 2px solid #f1c40f;
-        }
-
-        .city-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.4s;
-        }
-
-        .city-card:hover img {
-            opacity: 0.8;
-        }
-
-        .card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            text-align: center;
-        }
-
-        .card-content h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .btn-visit {
-            display: inline-block;
-            padding: 10px 25px;
-            background-color: #f1c40f;
-            color: #1a1a1a;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 25px;
-            transition: background 0.3s;
-        }
-
-        .btn-visit:hover {
-            background-color: #fff;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="hero">
-        <h1>Guide Régional Interactif</h1>
-        <p>Découvrez les richesses culturelles et touristiques de nos villes. Choisissez votre destination pour commencer l'exploration.</p>
-        
-        <div class="cities-container">
-            <div class="city-card">
-                <img src="images/essaouira_card.jpg" alt="Essaouira">
-                <div class="card-content">
-                    <h2>Essaouira</h2>
-                    <a href="essaouira.html" class="btn-visit">Explorer</a>
-                </div>
-            </div>
-
-            <div class="city-card">
-                <img src="images/tinghir_card.jpg" class="city-card-img" alt="Tinghir">
-                <div class="card-content">
-                    <h2>Tinghir</h2>
-                    <a href="tinghir.html" class="btn-visit">Explorer</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/projet_essaouira/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet_essaouira</title>
+    <script type="module" crossorigin src="/projet_essaouira/assets/index-MwmJjXkY.js"></script>
+    <link rel="stylesheet" crossorigin href="/projet_essaouira/assets/index-UmN6vpV3.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
