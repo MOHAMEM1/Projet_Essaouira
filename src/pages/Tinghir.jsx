@@ -9,17 +9,17 @@ const Tinghir = () => {
 
   const galleryData = [
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Assole_in_Tinghir.jpg",
+      src: import.meta.env.BASE_URL + "images/tinghir/1.jpg",
       title: "La Palmeraie Verdoyante",
       desc: "Une oasis majestueuse qui s'étend sur 30 kilomètres, offrant un contraste saisissant avec les montagnes arides environnantes. C'est le poumon agricole de la région."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kasbha_Tinghir_Todra_Morocco_-_panoramio_%282%29.jpg",
+      src: import.meta.env.BASE_URL + "images/tinghir/2.jpg",
       title: "La Kasbah Ancienne",
       desc: "Les anciennes habitations fortifiées en pisé (terre crue) dominent la vallée. Bien que certaines soient en ruine, elles témoignent de l'ingéniosité architecturale berbère ancienne."
     },
     {
-      src: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=80&w=800",
+      src: import.meta.env.BASE_URL + "images/tinghir/3.jpg",
       title: "Les Gorges du Todra",
       desc: "À 15 km du centre, ces canyons calcaires atteignent 300 mètres de hauteur. L'oued (rivière) glacé qui y coule rend cet endroit parfait pour se rafraîchir en été."
     }

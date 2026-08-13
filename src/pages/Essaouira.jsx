@@ -9,22 +9,22 @@ const Essaouira = () => {
 
   const galleryData = [
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/8/80/%22Breite_Mauern_sch%C3%BCtzen_die_Bev%C3%B6lkerung_von_Essaouira.%22_15.jpg",
+      src: import.meta.env.BASE_URL + "images/essaouira/1.jpg",
       title: "La Médina Fortifiée",
       desc: "Classée au patrimoine mondial de l'UNESCO, la médina d'Essaouira est un exemple exceptionnel de ville fortifiée du milieu du XVIIIe siècle, entourée d'une muraille de style Vauban."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/%22Drehort_f%C3%BCr_viele_Filme_und_Serien%22._14.jpg",
+      src: import.meta.env.BASE_URL + "images/essaouira/2.jpg",
       title: "La Skala de la Kasbah",
       desc: "Cette plateforme d'artillerie impressionnante défendait la ville contre les attaques maritimes. Ses canons en bronze espagnols sont toujours pointés vers l'océan Atlantique. Elle a servi de décor pour Astapor dans Game of Thrones."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/6/64/%22Ein_Schmelztiegel_der_Kulturen%22._16.jpg",
+      src: import.meta.env.BASE_URL + "images/essaouira/3.jpg",
       title: "Les Ruelles Bleues",
       desc: "L'architecture d'Essaouira se caractérise par ses murs blancs éclatants et ses portes et volets peints en bleu, créant une atmosphère apaisante et photogénique."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/e/ea/%22Breite_Mauern_sch%C3%BCtzen_die_Bev%C3%B6lkerung_von_Essaouira.%22_08.jpg",
+      src: import.meta.env.BASE_URL + "images/essaouira/4.jpg",
       title: "Le Port de Pêche",
       desc: "L'un des ports les plus animés du Maroc. On y voit des dizaines de barques bleues traditionnelles et on peut y déguster du poisson grillé fraîchement pêché."
     }
