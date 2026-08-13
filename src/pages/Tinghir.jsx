@@ -19,7 +19,7 @@ const Tinghir = () => {
       desc: "Les anciennes habitations fortifiées en pisé (terre crue) dominent la vallée. Bien que certaines soient en ruine, elles témoignent de l'ingéniosité architecturale berbère ancienne."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tinghir_-_Gorges_du_Todra.jpg/800px-Tinghir_-_Gorges_du_Todra.jpg",
+      src: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=80&w=800",
       title: "Les Gorges du Todra",
       desc: "À 15 km du centre, ces canyons calcaires atteignent 300 mètres de hauteur. L'oued (rivière) glacé qui y coule rend cet endroit parfait pour se rafraîchir en été."
     }
