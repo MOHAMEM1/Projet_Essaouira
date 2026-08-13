@@ -1,10 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Mountain, TreePine, Map, Utensils, Info, Bed, Sun, Compass } from 'lucide-react';
 
 const Tinghir = () => {
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const galleryData = [
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Assole_in_Tinghir.jpg",
+      title: "La Palmeraie Verdoyante",
+      desc: "Une oasis majestueuse qui s'étend sur 30 kilomètres, offrant un contraste saisissant avec les montagnes arides environnantes. C'est le poumon agricole de la région."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kasbha_Tinghir_Todra_Morocco_-_panoramio_%282%29.jpg",
+      title: "La Kasbah Ancienne",
+      desc: "Les anciennes habitations fortifiées en pisé (terre crue) dominent la vallée. Bien que certaines soient en ruine, elles témoignent de l'ingéniosité architecturale berbère ancienne."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/1/14/Morocco_Gorges_du_Todra_20110321_1.jpg",
+      title: "Les Gorges du Todra",
+      desc: "À 15 km du centre, ces canyons calcaires atteignent 300 mètres de hauteur. L'oued (rivière) glacé qui y coule rend cet endroit parfait pour se rafraîchir en été."
+    }
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,6 +42,33 @@ const Tinghir = () => {
       exit={{ opacity: 0, x: 100 }}
       transition={{ duration: 0.6 }}
     >
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            className="image-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div 
+              className="image-modal-content tinghir-modal"
+              initial={{ scale: 0.8, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.8, y: 50, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="close-modal-btn" onClick={() => setSelectedImage(null)}>✕</button>
+              <img src={selectedImage.src} alt={selectedImage.title} />
+              <div className="modal-info">
+                <h3>{selectedImage.title}</h3>
+                <p>{selectedImage.desc}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <button className="btn-back-absolute" onClick={() => navigate('/')}>
         <ArrowLeft size={24} /> Retour
       </button>
@@ -162,13 +208,23 @@ const Tinghir = () => {
         {/* Gallery */}
         <section className="gallery-section">
           <motion.h2 className="section-title" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            Galerie Visuelle
+            Galerie Visuelle (Cliquez pour découvrir)
           </motion.h2>
           
           <div className="gallery-grid">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Assole_in_Tinghir.jpg" alt="Vue Tinghir" className="gallery-img glass-img" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Kasbha_Tinghir_Todra_Morocco_-_panoramio_%282%29.jpg" alt="Kasbah Tinghir" className="gallery-img glass-img" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Africa_relief_location_map.jpg" alt="Tinghir map" className="gallery-img glass-img" />
+            {galleryData.map((img, index) => (
+                <motion.div 
+                  key={index} 
+                  className="gallery-item-wrapper"
+                  whileHover={{ scale: 1.05 }}
+                  onClick={() => setSelectedImage(img)}
+                >
+                  <img src={img.src} alt={img.title} className="gallery-img glass-img interactive-img" />
+                  <div className="img-overlay-hint">
+                    <Info size={24} color="white" />
+                  </div>
+                </motion.div>
+            ))}
           </div>
         </section>
       </div>

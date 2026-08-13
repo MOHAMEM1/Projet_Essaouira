@@ -1,11 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Anchor, Music, Sun, Info, Map as MapIcon, Utensils, Bed, CloudSun, Calendar } from 'lucide-react';
 
 const Essaouira = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('all');
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const galleryData = [
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/8/80/%22Breite_Mauern_sch%C3%BCtzen_die_Bev%C3%B6lkerung_von_Essaouira.%22_15.jpg",
+      title: "La Médina Fortifiée",
+      desc: "Classée au patrimoine mondial de l'UNESCO, la médina d'Essaouira est un exemple exceptionnel de ville fortifiée du milieu du XVIIIe siècle, entourée d'une muraille de style Vauban."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/%22Drehort_f%C3%BCr_viele_Filme_und_Serien%22._14.jpg",
+      title: "La Skala de la Kasbah",
+      desc: "Cette plateforme d'artillerie impressionnante défendait la ville contre les attaques maritimes. Ses canons en bronze espagnols sont toujours pointés vers l'océan Atlantique. Elle a servi de décor pour Astapor dans Game of Thrones."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/6/64/%22Ein_Schmelztiegel_der_Kulturen%22._16.jpg",
+      title: "Les Ruelles Bleues",
+      desc: "L'architecture d'Essaouira se caractérise par ses murs blancs éclatants et ses portes et volets peints en bleu, créant une atmosphère apaisante et photogénique."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/e/ea/%22Breite_Mauern_sch%C3%BCtzen_die_Bev%C3%B6lkerung_von_Essaouira.%22_08.jpg",
+      title: "Le Port de Pêche",
+      desc: "L'un des ports les plus animés du Maroc. On y voit des dizaines de barques bleues traditionnelles et on peut y déguster du poisson grillé fraîchement pêché."
+    }
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,6 +47,33 @@ const Essaouira = () => {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.6 }}
     >
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            className="image-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div 
+              className="image-modal-content"
+              initial={{ scale: 0.8, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.8, y: 50, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="close-modal-btn" onClick={() => setSelectedImage(null)}>✕</button>
+              <img src={selectedImage.src} alt={selectedImage.title} />
+              <div className="modal-info">
+                <h3>{selectedImage.title}</h3>
+                <p>{selectedImage.desc}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <button className="btn-back-absolute" onClick={() => navigate('/')}>
         <ArrowLeft size={24} /> Retour
       </button>
@@ -169,13 +219,22 @@ const Essaouira = () => {
         {/* Gallery */}
         <section className="gallery-section">
           <motion.h2 className="section-title" variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            Galerie Visuelle
+            Galerie Visuelle (Cliquez pour découvrir)
           </motion.h2>
           <div className="gallery-grid">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/%22Breite_Mauern_sch%C3%BCtzen_die_Bev%C3%B6lkerung_von_Essaouira.%22_15.jpg" alt="Essaouira" className="gallery-img glass-img" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/%22Drehort_f%C3%BCr_viele_Filme_und_Serien%22._14.jpg" alt="Essaouira canons" className="gallery-img glass-img" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/%22Ein_Schmelztiegel_der_Kulturen%22._16.jpg" alt="Essaouira rue" className="gallery-img glass-img" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/%22Breite_Mauern_sch%C3%BCtzen_die_Bev%C3%B6lkerung_von_Essaouira.%22_08.jpg" alt="Essaouira port" className="gallery-img glass-img" />
+            {galleryData.map((img, index) => (
+                <motion.div 
+                  key={index} 
+                  className="gallery-item-wrapper"
+                  whileHover={{ scale: 1.05 }}
+                  onClick={() => setSelectedImage(img)}
+                >
+                  <img src={img.src} alt={img.title} className="gallery-img glass-img interactive-img" />
+                  <div className="img-overlay-hint">
+                    <Info size={24} color="white" />
+                  </div>
+                </motion.div>
+            ))}
           </div>
         </section>
       </div>
